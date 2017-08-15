@@ -1,5 +1,6 @@
 import { handleActions } from 'redux-actions';
 import { login } from '../actions/login';
+import { saveProfile } from '../actions/saveProfile';
 
 const initialState = {
   name: null,
@@ -13,6 +14,14 @@ export default handleActions({
       name: 'Sean Corgan',
       username: 'seancorgan',
       id: 1
+    };
+  },
+  [saveProfile]: (state, action) => {
+    var { name, username } = action.payload;
+    return {
+      ...state,
+      name,
+      username
     };
   }
 }, initialState);

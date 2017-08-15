@@ -4,39 +4,44 @@ import styles from '../style/login.scss';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import PropTypes from 'prop-types';
-import {Row, Col } from 'react-flexbox-grid';
+import { Row, Col } from 'react-flexbox-grid';
 import _ from 'lodash';
 
 @cssModules(styles)
 export default class Login extends Component {
   static propTypes = {
-    login: PropTypes.func.isRequired,
+    loginAsync: PropTypes.func.isRequired,
     user: PropTypes.object
   };
 
   constructor(props) {
     super(props);
     this.state = {
-        usernameError: false,
-        passwordError: false
-      }
+      usernameError: false,
+      passwordError: false
+    };
   }
-
+  /**
+   * Returns true if valid, false if not.
+   */
   checkfield(input, field, text) {
     if (_.isEmpty(input)) {
       this.setState({
         [field]: text
       });
-      return true;
+      return false;
     }
     this.setState({
       [field]: false
     });
-    return false;
+    return true;
   }
   checkLogin() {
-    this.checkfield(this.refs.username.input.value, 'usernameError', 'Please enter a valid username');
-    this.checkfield(this.refs.password.input.value, 'passwordError', 'Please enter a valid password');
+    const username = this.refs.username.input.value;
+    const password = this.refs.password.input.value;
+    if (this.checkfield(username, 'usernameError', 'Please enter a valid username'), this.checkfield(password, 'passwordError', 'Please enter a valid password')) {
+      this.props.loginAsync(username, password, this.props.history);
+    }
   }
   render() {
     const { login } = this.props;
@@ -47,7 +52,7 @@ export default class Login extends Component {
           <TextField
             ref="username"
             hintText="username"
-            onBlur={() => { this.checkfield(this.refs.username.input.value, 'usernameError', 'Please enter a valid username') }}
+            onBlur={() => { this.checkfield(this.refs.username.input.value, 'usernameError', 'Please enter a valid username'); }}
             errorText={this.state.usernameError}
             floatingLabelText="username"
           />
@@ -63,7 +68,7 @@ export default class Login extends Component {
       </Row>
 
       <Row>
-        <RaisedButton label="Login" onClick={() => { this.checkLogin() }} primary />
+        <RaisedButton label="Login" onClick={() => { this.checkLogin(); }} primary />
       </Row>
     </div>
     );
