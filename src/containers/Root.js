@@ -5,6 +5,7 @@ import { ConnectedRouter } from 'react-router-redux';
 import App from './App';
 import DevTools, { ImportExportTool } from './DevTools';
 import routes from '../config/routes.js';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 export default class Root extends Component {
   static propTypes = {
@@ -21,7 +22,9 @@ export default class Root extends Component {
       <Provider store={store}>
         <ConnectedRouter history={history}>
           <div>
-            <App>{routes}</App>
+            <MuiThemeProvider>
+              <App>{routes}</App>
+            </MuiThemeProvider>
 
             {isDevEnv &&
               <div>
