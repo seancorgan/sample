@@ -8,21 +8,19 @@ import { Row, Col } from 'react-flexbox-grid';
 import _ from 'lodash';
 
 @cssModules(styles)
-export default class Login extends Component {
-  static propTypes = {
-    loginAsync: PropTypes.func.isRequired,
-    user: PropTypes.object
-  };
+export default class SignupPage extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
+      nameError: false,
       usernameError: false,
       passwordError: false
     };
   }
   /**
    * Returns true if valid, false if not.
+   * Mutates the false fields.
    */
   checkfield(input, field, text) {
     if (_.isEmpty(input)) {
@@ -36,20 +34,31 @@ export default class Login extends Component {
     });
     return true;
   }
-  checkLogin() {
+  checkForm() {
     const username = this.refs.username.input.value;
+    const name = this.refs.name.input.value;
     const password = this.refs.password.input.value;
-    if (this.checkfield(username, 'usernameError', 'Please enter a valid username') && this.checkfield(password, 'passwordError', 'Please enter a valid password')) {
-      this.props.loginAsync(username, password, this.props.history);
+
+    if (this.checkfield(username, 'usernameError', 'Please enter a valid username') &&
+        this.checkfield(name, 'nameError', 'Please enter a name') &&
+        this.checkfield(password, 'passwordError', 'Please enter a valid password')) {
+        this.props.createProfileAsync({name, username, password, history: this.props.history});
     }
   }
   render() {
-    const { login } = this.props;
+    const { user } = this.props;
     return (
       <div>
-        <h2>Login</h2>
+      <h2>Edit Profile</h2>
       <Row>
         <Col lg={12}>
+          <TextField
+            ref="name"
+            hintText="name"
+            onBlur={() => { this.checkfield(this.refs.name.input.value, 'nameError', 'Please enter a valid name'); }}
+            errorText={this.state.nameError}
+            floatingLabelText="name"
+          />
           <TextField
             ref="username"
             hintText="username"
@@ -57,6 +66,7 @@ export default class Login extends Component {
             errorText={this.state.usernameError}
             floatingLabelText="username"
           />
+
           <TextField
             ref="password"
             onBlur={() => this.checkfield(this.refs.password.input.value, 'passwordError', 'Please enter a valid password')}
@@ -65,11 +75,12 @@ export default class Login extends Component {
             errorText={this.state.passwordError}
             type="password"
           />
+
         </Col>
       </Row>
 
       <Row>
-        <RaisedButton label="Login" onClick={() => { this.checkLogin(); }} primary />
+        <RaisedButton label="Sign Up" onClick={() => { this.checkForm(); }} primary />
       </Row>
     </div>
     );

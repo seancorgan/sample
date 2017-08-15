@@ -8,7 +8,7 @@ import { Row, Col } from 'react-flexbox-grid';
 import _ from 'lodash';
 
 @cssModules(styles)
-export default class Login extends Component {
+export default class ProfileForm extends Component {
   static propTypes = {
     user: PropTypes.object
   };
@@ -40,7 +40,7 @@ export default class Login extends Component {
     const username = this.refs.username.input.value;
     const name = this.refs.name.input.value;
 
-    if (this.checkfield(username, 'usernameError', 'Please enter a valid username') ||
+    if (this.checkfield(username, 'usernameError', 'Please enter a valid username') &&
         this.checkfield(name, 'nameError', 'Please enter a name')) {
         this.props.saveProfileAsync({name, username});
     }
@@ -49,6 +49,7 @@ export default class Login extends Component {
     const { user } = this.props;
     return (
       <div>
+      <h2>Edit Profile</h2>
       <Row>
         <Col lg={12}>
           <TextField

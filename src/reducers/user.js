@@ -1,6 +1,6 @@
 import { handleActions } from 'redux-actions';
 import { login } from '../actions/login';
-import { saveProfile } from '../actions/saveProfile';
+import { saveProfile, createProfile } from '../actions/saveProfile';
 
 const initialState = {
   name: null,
