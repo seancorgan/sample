@@ -8,7 +8,7 @@ export default class Header extends Component {
         <h2>salesforce-test</h2>
 
         <Link to="/">Home Page</Link> -&nbsp;
-        <Link to="/another">Another Page</Link>
+        <Link to="/login">Login</Link>
       </div>
     );
   }

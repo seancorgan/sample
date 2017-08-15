@@ -15,7 +15,6 @@ export default class Counter extends Component {
 
   render() {
     const { counter, increment, decrement, incrementAsync, styles } = this.props;
-
     return (
       <p>
         <span className={styles.counter}>Counter: {counter}</span>

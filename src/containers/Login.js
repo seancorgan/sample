@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Login from '../components/Login';
-import * as CounterActions from '../actions/counter';
+import * as LoginActions from '../actions/login';
 import wrapActionCreators from '../utils/wrapActionCreators';
 
 @connect(state => ({
-  counter: state.counter
-}), wrapActionCreators(CounterActions))
-export default class CounterPage extends Component {
+  user: state.user
+}), wrapActionCreators(LoginActions))
+export default class LoginPage extends Component {
   render() {
     return (
       <Login {...this.props} />

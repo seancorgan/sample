@@ -44,6 +44,11 @@ const config = port => ({
         exclude: /node_modules/
       },
       {
+        test: /\.css$/,
+        loader: 'style-loader!css-loader',
+        include: /flexboxgrid/
+      },
+      {
         test: /\.scss$/,
         use: [
           'style-loader?sourceMap',
