@@ -7,7 +7,7 @@ export const login = createAction('LOGIN');
 export const logOut = createAction('LOGOUT');
 export const deleteAccount = createAction('DELETE_ACCOOUNT');
 
-var db = new PouchDB('http://localhost:5984/salesforce', {skip_setup: true});
+var db = new PouchDB('https://506381d5-ea8e-4437-adf1-fdc3d52afc43-bluemix.cloudant.com', {skip_setup: true});
 
 export function saveProfileAsync({name, username}) {
   return (dispatch, getState) => {
