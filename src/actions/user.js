@@ -56,13 +56,31 @@ export function deleteAccountAsync(id) {
 
 export function loginAsync(username, password, history) {
   return dispatch => {
-    setTimeout(() => {
-      dispatch(login({
-        id: 1,
-        name: 'Sean Corgan',
-        username: 'seancorgan'
-      }));
-      history.push('/profile');
+    db.login(username, password).then((resp)=> {
+      db.getUser(username)
+      .then((resp) => {
+        dispatch(login({
+          id: resp._id,
+          rev: resp._rev,
+          name: resp.formalName,
+          username: username
+        }));
+        history.push('/profile');
+      })
+      .catch((err) => {
+        if (err.name === 'not_found') {
+          // typo, or you don't have the privileges to see this user
+        } else {
+          // some other error
+        }
+      });
+    })
+    .catch((err) => {
+      if (err.name === 'unauthorized') {
+        // name or password incorrect
+      } else {
+        // cosmic rays, a meteor, etc.
+      }
     });
   };
 }

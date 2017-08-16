@@ -41,7 +41,6 @@ export default class Login extends Component {
   }
   render() {
     const {styles} = this.props;
-    console.log(styles);
     return (
       <div>
         <h2>Login</h2>
