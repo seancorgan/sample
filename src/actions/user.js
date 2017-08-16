@@ -49,8 +49,16 @@ export function deleteAccountAsync(id) {
   return dispatch => {
     setTimeout(() => {
       dispatch(logOut());
+      db.logout();
       history.push('/signup');
     });
+  };
+}
+
+export function logOutAsync() {
+  return dispatch => {
+    dispatch(logOut());
+    db.logout();
   };
 }
 

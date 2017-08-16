@@ -33,7 +33,6 @@ const Logged = (props) => (
     })} primaryText="Delete Account" />
     <MenuItem onClick={() => {
       props.history.push('/login');
-      props.logOut();
     }} primaryText="Sign out" />
   </IconMenu>
 );
