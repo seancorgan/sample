@@ -49,38 +49,51 @@ export default class SignupPage extends Component {
     return (
       <div>
       <h2>Edit Profile</h2>
-      <div>
-        <div>
+      <div className="row center-xs">
+        <div className="col-xs-12">
           <TextField
             ref="name"
+            fullWidth
             hintText="name"
             onBlur={() => { this.checkfield(this.refs.name.input.value, 'nameError', 'Please enter a valid name'); }}
             errorText={this.state.nameError}
             floatingLabelText="name"
           />
+        </div>
+
+          <div className="col-xs-12">
           <TextField
             ref="username"
+            fullWidth
             hintText="username"
             onBlur={() => { this.checkfield(this.refs.username.input.value, 'usernameError', 'Please enter a valid username'); }}
             errorText={this.state.usernameError}
             floatingLabelText="username"
           />
+        </div>
 
+        <div className="col-xs-12">
           <TextField
             ref="password"
+            fullWidth
             onBlur={() => this.checkfield(this.refs.password.input.value, 'passwordError', 'Please enter a valid password')}
             hintText="Enter your Password"
             floatingLabelText="Password"
             errorText={this.state.passwordError}
             type="password"
           />
-
         </div>
       </div>
 
-      <div>
-        <RaisedButton label="Sign Up" onClick={() => { this.checkForm(); }} primary />
+      <div className="row end-xs">
+          <div className="col-xs-6">
+              <div className="box">
+                <RaisedButton label="Sign Up" onClick={() => { this.checkForm(); }} primary />
+              </div>
+          </div>
       </div>
+
+
     </div>
     );
   }

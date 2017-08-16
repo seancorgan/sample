@@ -14,7 +14,6 @@ export function saveProfileAsync({name, username}) {
 export function createProfileAsync({name, username, password, history}) {
   return dispatch => {
     setTimeout(() => {
-      debugger;
       dispatch(login({name, username}));
       history.push('/profile');
     });
