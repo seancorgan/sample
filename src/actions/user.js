@@ -9,30 +9,36 @@ export const logOut = createAction('LOGOUT');
 export const deleteAccount = createAction('DELETE_ACCOOUNT');
 
 // var db = new PouchDB('https://506381d5-ea8e-4437-adf1-fdc3d52afc43-bluemix.cloudant.com', {skip_setup: true});
-var db = new PouchDB('http://localhost:5984/salesforce', {skip_setup: true});
+var db = new PouchDB('http://localhost:5984/salesforce', { skip_setup: true });
 
-export function saveProfileAsync({name, username}) {
+export function saveProfileAsync({ name, username }) {
   return (dispatch, getState) => {
-      const {user} = getState();
+    const { user } = getState();
 
-      db.putUser(user.username, {
-          metadata : {
-          formalName : name,
-        }
+    db.putUser(user.username, {
+        metadata : {
+            formalName : name,
+          }
       }, function (err, response) {
-          dispatch(saveProfile({name, username: user.username}));
+        dispatch(saveProfile({ name, username: user.username }));
       });
   };
 }
 
-export function createProfileAsync({name, username, password, history}) {
+export function createProfileAsync({ name, username, password, history }) {
   return dispatch => {
-      db.signup(username, password, {
-      metadata : {
+    db.signup(username, password, {
+        metadata : {
         formalName: name
       }
-    })
+      })
     .then((response) => {
+      dispatch(notify({
+        message: 'Account created',
+        type: 'success'
+      }));
+
+
       dispatch(login({
         id: response.id,
         name: name,
@@ -43,11 +49,20 @@ export function createProfileAsync({name, username, password, history}) {
     })
     .catch((err) => {
       if (err.name === 'conflict') {
-        // "batman" already exists, choose another username
+        dispatch(notify({
+          message: 'This user account already exists please choose another.',
+          type: 'error'
+        }));
       } else if (err.name === 'forbidden') {
-        // invalid username
+        dispatch(notify({
+          message: 'This is not a valid user name please try another',
+          type: 'error'
+        }));
       } else {
-        // HTTP error, cosmic rays, etc.
+        dispatch(notify({
+           message: 'Our service is down :( ',
+           type: 'error'
+         }));
       }
     });
   };
@@ -76,7 +91,7 @@ export function loginAsync(username, password, history) {
       message: 'Logging in',
       type: 'info'
     }));
-    db.login(username, password).then((resp)=> {
+    db.login(username, password).then((resp) => {
       db.getUser(username)
       .then((resp) => {
         dispatch(login({
