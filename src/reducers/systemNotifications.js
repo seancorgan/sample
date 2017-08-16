@@ -1,5 +1,5 @@
 import { handleActions } from 'redux-actions';
-import { notify } from '../actions/systemNotifications';
+import { notify, closeNotify } from '../actions/systemNotifications';
 
 const initialState = {
   open: false,
@@ -13,6 +13,11 @@ export default handleActions({
       open: true,
       message: action.payload.message,
       type: action.payload.type
-    }
+    };
+  },
+  [closeNotify]: (state) => {
+    return {
+      ...state, open: false
+    };
   }
 }, initialState);

@@ -9,7 +9,9 @@ export default class SystemNotifications extends Component {
   static propTypes = {
     styles: PropTypes.object
   };
-
+  onRequestClose() {
+    this.props.closeNotify();
+  }
   render() {
     const { notifications } = this.props;
     var notificationColor;
@@ -40,10 +42,12 @@ export default class SystemNotifications extends Component {
 
     return (<Snackbar open={notifications.open}
       message={notifications.message}
-      autoHideDuration={4000}
+      autoHideDuration={2000}
       bodyStyle={notificationColor}
       contentStyle={notificationColor}
-      onRequestClose={() => {}}/>
+      onRequestClose={() => {
+        this.onRequestClose();
+      }}/>
     );
   }
 }
