@@ -1,5 +1,5 @@
 import { createAction } from 'redux-actions';
-import { notify } from './systemNotifications';
+import { notify, closeNotify } from './systemNotifications';
 import PouchDB from 'pouchdb';
 PouchDB.plugin(require('pouchdb-authentication'));
 
@@ -98,8 +98,17 @@ export function loginAsync(username, password, history) {
   return dispatch => {
 
     db.login(username, password).then((resp) => {
+
+      dispatch(notify({
+        message: 'Logging in...',
+        type: 'info'
+      }));
+
       db.getUser(username)
       .then((resp) => {
+
+        dispatch(closeNotify());
+
         dispatch(login({
           id: resp._id,
           rev: resp._rev,
