@@ -27,7 +27,10 @@ const Logged = (props) => (
     targetOrigin={{horizontal: 'right', vertical: 'top'}}
     anchorOrigin={{horizontal: 'right', vertical: 'top'}}
   >
-    <MenuItem primaryText="Delete Account" />
+    <MenuItem onClick={(() => {
+      props.deleteAccountAsync(props.user.id);
+      props.history.push('/signup');
+    })} primaryText="Delete Account" />
     <MenuItem onClick={() => {
       props.history.push('/login');
       props.logOut();

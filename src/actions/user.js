@@ -3,6 +3,7 @@ import { createAction } from 'redux-actions';
 export const saveProfile = createAction('SAVE_PROFILE');
 export const login = createAction('LOGIN');
 export const logOut = createAction('LOGOUT');
+export const deleteAccount = createAction('DELETE_ACCOOUNT');
 
 export function saveProfileAsync({name, username}) {
   return dispatch => {
@@ -17,6 +18,15 @@ export function createProfileAsync({name, username, password, history}) {
     setTimeout(() => {
       dispatch(login({name, username}));
       history.push('/profile');
+    });
+  };
+}
+
+export function deleteAccountAsync(id) {
+  return dispatch => {
+    setTimeout(() => {
+      dispatch(logOut());
+      history.push('/signup');
     });
   };
 }
