@@ -19,8 +19,19 @@ export function saveProfileAsync({ name, username }) {
         metadata : {
             formalName : name,
           }
-      }, function (err, response) {
+      })
+      .then((resp) => {
         dispatch(saveProfile({ name, username: user.username }));
+        dispatch(notify({
+          message: 'Profile Saved',
+          type: 'success'
+        }));
+      })
+      .catch( (err) => {
+        dispatch(notify({
+          message: 'Profile could not be saved right now',
+          type: 'error'
+        }));
       });
   };
 }
@@ -37,8 +48,6 @@ export function createProfileAsync({ name, username, password, history }) {
         message: 'Account created',
         type: 'success'
       }));
-
-
       dispatch(login({
         id: response.id,
         name: name,
@@ -87,10 +96,7 @@ export function logOutAsync() {
 
 export function loginAsync(username, password, history) {
   return dispatch => {
-    dispatch(notify({
-      message: 'Logging in',
-      type: 'info'
-    }));
+
     db.login(username, password).then((resp) => {
       db.getUser(username)
       .then((resp) => {
