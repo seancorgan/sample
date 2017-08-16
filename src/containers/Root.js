@@ -25,13 +25,6 @@ export default class Root extends Component {
             <MuiThemeProvider>
               <App>{routes}</App>
             </MuiThemeProvider>
-
-            {isDevEnv &&
-              <div>
-                <DevTools />
-                <ImportExportTool />
-              </div>
-            }
           </div>
         </ConnectedRouter>
       </Provider>

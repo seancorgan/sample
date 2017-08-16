@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cssModules from 'react-css-modules';
-import Header from '../components/Header';
+import HeaderContainer from '../containers/Header';
 import styles from '../style/index.scss';
 
 @cssModules(styles)
@@ -13,11 +13,9 @@ export default class App extends Component {
 
   render() {
     const { children, styles } = this.props;
-
     return (
       <div className={styles.container}>
-        <Header />
-
+        <HeaderContainer />
         {children}
       </div>
     );
