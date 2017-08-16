@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import ProfileForm from '../components/ProfileForm';
 import * as saveProfile from '../actions/saveProfile';
 import wrapActionCreators from '../utils/wrapActionCreators';
+import Card from '../components/Card';
+
 
 @connect(state => ({
   user: state.user
@@ -10,7 +12,9 @@ import wrapActionCreators from '../utils/wrapActionCreators';
 export default class ProfilePage extends Component {
   render() {
     return (
-      <ProfileForm {...this.props} />
+      <Card>
+        <ProfileForm {...this.props} />
+      </Card>
     );
   }
 }

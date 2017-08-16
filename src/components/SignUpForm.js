@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import cssModules from 'react-css-modules';
-import styles from '../style/login.scss';
+import styles from '../style/index.scss';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import PropTypes from 'prop-types';
 import _ from 'lodash';
 
 @cssModules(styles)
@@ -45,10 +44,10 @@ export default class SignupPage extends Component {
     }
   }
   render() {
-    const { user } = this.props;
+    const { styles } = this.props;
     return (
       <div>
-      <h2>Edit Profile</h2>
+      <h2>Sign Up</h2>
       <div className="row center-xs">
         <div className="col-xs-12">
           <TextField
@@ -88,12 +87,10 @@ export default class SignupPage extends Component {
       <div className="row end-xs">
           <div className="col-xs-6">
               <div className="box">
-                <RaisedButton label="Sign Up" onClick={() => { this.checkForm(); }} primary />
+                <RaisedButton className={styles.actionBtn} label="Sign Up" onClick={() => { this.checkForm(); }} primary />
               </div>
           </div>
       </div>
-
-
     </div>
     );
   }
