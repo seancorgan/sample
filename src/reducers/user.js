@@ -1,5 +1,5 @@
 import { handleActions } from 'redux-actions';
-import { saveProfile, login } from '../actions/user';
+import { saveProfile, login, logOut } from '../actions/user';
 
 const initialState = {
   name: null,
@@ -22,5 +22,8 @@ export default handleActions({
       name,
       username
     };
+  },
+  [logOut]: (state) => {
+    return initialState;
   }
 }, initialState);

@@ -2,6 +2,7 @@ import { createAction } from 'redux-actions';
 
 export const saveProfile = createAction('SAVE_PROFILE');
 export const login = createAction('LOGIN');
+export const logOut = createAction('LOGOUT');
 
 export function saveProfileAsync({name, username}) {
   return dispatch => {

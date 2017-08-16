@@ -20,6 +20,7 @@ class Login extends Component {
 const Logged = (props) => (
   <IconMenu
     {...props}
+
     iconButtonElement={
       <IconButton><MoreVertIcon /></IconButton>
     }
@@ -27,18 +28,20 @@ const Logged = (props) => (
     anchorOrigin={{horizontal: 'right', vertical: 'top'}}
   >
     <MenuItem primaryText="Delete Account" />
-    <MenuItem primaryText="Sign out" />
+    <MenuItem onClick={() => {
+      props.history.push('/login');
+      props.logOut();
+    }} primaryText="Sign out" />
   </IconMenu>
 );
 
 export default class Header extends Component {
   render() {
     return (
-
               <AppBar
                 title="Sales Force Test"
                 iconElementLeft={<IconButton/>}
-                iconElementRight={this.props.user.id ? <Logged /> : <Login />}
+                iconElementRight={this.props.user.id ? <Logged {...this.props} /> : <Login />}
               />
     );
   }
