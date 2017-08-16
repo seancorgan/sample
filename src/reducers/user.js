@@ -8,11 +8,13 @@ const initialState = {
 };
 
 export default handleActions({
-  [login]: (state) => {
+  [login]: (state, action) => {
+    var { name, username, id, rev } = action.payload;
     return {
-      name: 'Sean Corgan',
-      username: 'seancorgan',
-      id: 1
+      name,
+      username,
+      id,
+      rev
     };
   },
   [saveProfile]: (state, action) => {
