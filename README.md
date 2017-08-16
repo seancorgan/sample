@@ -1,6 +1,6 @@
 # salesforce-test
 
-A test 
+A test
 
 ## Requirements
 
@@ -25,6 +25,12 @@ Install dependencies:
 ```sh
 $ npm install
 ```
+
+## Couch DB
+
+Install Couch DB
+Enable CORS for your Couche DB instance
+https://github.com/pouchdb/add-cors-to-couchdb
 
 Boot up the app:
 
