@@ -60,7 +60,12 @@ export default class Login extends Component {
         </div>
 
         <div className="row end-xs">
-          <div className="col-xs-6">
+          <div className="col-xs-2">
+            <RaisedButton className={styles.actionBtn} label="Sign Up" onClick={() => {
+              this.props.history.push('/signup');
+            }} />
+          </div>
+          <div className="col-xs-10">
             <div className="box">
               <RaisedButton className={styles.actionBtn} label="Login" onClick={() => {
                 this.checkLogin();

@@ -16,7 +16,7 @@ export default class Card extends Component {
     return (
       <div className="container-fluid">
         <div className="row center-xs">
-          <div className="col-xs-10 col-sm-8 col-lg-2">
+          <div className="col-xs-10 col-sm-8 col-lg-3">
             <div className="box">
               <div className={styles.card}>
                 {children}
