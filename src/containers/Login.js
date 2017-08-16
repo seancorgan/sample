@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Login from '../components/Login';
 import Card from '../components/Card';
-import * as LoginActions from '../actions/login';
+import * as UserActions from '../actions/user';
 import wrapActionCreators from '../utils/wrapActionCreators';
 
 @connect(state => ({
   user: state.user
-}), wrapActionCreators(LoginActions))
+}), wrapActionCreators(UserActions))
 export default class LoginPage extends Component {
   render() {
     return (
