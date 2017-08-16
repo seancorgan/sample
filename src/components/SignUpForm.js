@@ -4,7 +4,6 @@ import styles from '../style/login.scss';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import PropTypes from 'prop-types';
-import { Row, Col } from 'react-flexbox-grid';
 import _ from 'lodash';
 
 @cssModules(styles)
@@ -50,8 +49,8 @@ export default class SignupPage extends Component {
     return (
       <div>
       <h2>Edit Profile</h2>
-      <Row>
-        <Col lg={12}>
+      <div>
+        <div>
           <TextField
             ref="name"
             hintText="name"
@@ -76,12 +75,12 @@ export default class SignupPage extends Component {
             type="password"
           />
 
-        </Col>
-      </Row>
+        </div>
+      </div>
 
-      <Row>
+      <div>
         <RaisedButton label="Sign Up" onClick={() => { this.checkForm(); }} primary />
-      </Row>
+      </div>
     </div>
     );
   }

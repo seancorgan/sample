@@ -13,7 +13,6 @@ export function saveProfileAsync({name, username}) {
 
 export function createProfileAsync({name, username, password, history}) {
   return dispatch => {
-    debugger; 
     setTimeout(() => {
       debugger;
       dispatch(login({name, username}));

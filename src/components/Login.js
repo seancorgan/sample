@@ -4,7 +4,6 @@ import styles from '../style/login.scss';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import PropTypes from 'prop-types';
-import { Row, Col } from 'react-flexbox-grid';
 import _ from 'lodash';
 
 @cssModules(styles)
@@ -48,29 +47,41 @@ export default class Login extends Component {
     return (
       <div>
         <h2>Login</h2>
-      <Row>
-        <Col lg={12}>
+        <div className="row center-xs">
+          <div className="col-xs-12">
           <TextField
             ref="username"
             hintText="username"
+            fullWidth
             onBlur={() => { this.checkfield(this.refs.username.input.value, 'usernameError', 'Please enter a valid username'); }}
             errorText={this.state.usernameError}
             floatingLabelText="username"
           />
+        </div>
+        </div>
+
+        <div className="row center-xs">
+          <div className="col-xs-12">
           <TextField
             ref="password"
+            fullWidth
             onBlur={() => this.checkfield(this.refs.password.input.value, 'passwordError', 'Please enter a valid password')}
             hintText="Enter your Password"
             floatingLabelText="Password"
             errorText={this.state.passwordError}
             type="password"
           />
-        </Col>
-      </Row>
+        </div>
+        </div>
 
-      <Row>
-        <RaisedButton label="Login" onClick={() => { this.checkLogin(); }} primary />
-      </Row>
+
+        <div className="row end-xs">
+            <div className="col-xs-6">
+                <div className="box">
+                  <RaisedButton label="Login" onClick={() => { this.checkLogin(); }} primary />
+                </div>
+            </div>
+        </div>
     </div>
     );
   }

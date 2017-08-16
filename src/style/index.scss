@@ -1,6 +1,13 @@
-.container {
-  padding: 0 20px;
-  width: 500px;
-  border: 1px solid #ddd;
-  font-family: sans-serif;
+* { box-sizing:border-box; }
+
+body {
+	font-family: Helvetica;
+	background: #eee;
+  -webkit-font-smoothing: antialiased;
+}
+
+h2 {
+	letter-spacing: 3px;
+  font-size: 1.2rem;
+	font-weight: 400;
 }
