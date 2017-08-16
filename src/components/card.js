@@ -14,7 +14,7 @@ export default class Card extends Component {
   render() {
     const {children, styles} = this.props;
     return (
-      <div>
+      <div className="container-fluid">
         <div className="row center-xs">
           <div className="col-xs-10 col-sm-8 col-lg-2">
             <div className="box">
