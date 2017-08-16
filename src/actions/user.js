@@ -1,4 +1,5 @@
 import { createAction } from 'redux-actions';
+import { notify } from './systemNotifications';
 import PouchDB from 'pouchdb';
 PouchDB.plugin(require('pouchdb-authentication'));
 
@@ -7,7 +8,8 @@ export const login = createAction('LOGIN');
 export const logOut = createAction('LOGOUT');
 export const deleteAccount = createAction('DELETE_ACCOOUNT');
 
-var db = new PouchDB('https://506381d5-ea8e-4437-adf1-fdc3d52afc43-bluemix.cloudant.com', {skip_setup: true});
+// var db = new PouchDB('https://506381d5-ea8e-4437-adf1-fdc3d52afc43-bluemix.cloudant.com', {skip_setup: true});
+var db = new PouchDB('http://localhost:5984/salesforce', {skip_setup: true});
 
 export function saveProfileAsync({name, username}) {
   return (dispatch, getState) => {
@@ -70,6 +72,10 @@ export function logOutAsync() {
 
 export function loginAsync(username, password, history) {
   return dispatch => {
+    dispatch(notify({
+      message: 'Logging in',
+      type: 'info'
+    }));
     db.login(username, password).then((resp)=> {
       db.getUser(username)
       .then((resp) => {
@@ -83,17 +89,29 @@ export function loginAsync(username, password, history) {
       })
       .catch((err) => {
         if (err.name === 'not_found') {
-          // typo, or you don't have the privileges to see this user
+          dispatch(notify({
+            message: 'The user account was not found',
+            type: 'error'
+          }));
         } else {
-          // some other error
+          dispatch(notify({
+            message: 'Our service is down :(',
+            type: 'error'
+          }));
         }
       });
     })
     .catch((err) => {
       if (err.name === 'unauthorized') {
-        // name or password incorrect
+        dispatch(notify({
+          message: 'The user account was not found',
+          type: 'error'
+        }));
       } else {
-        // cosmic rays, a meteor, etc.
+        dispatch(notify({
+          message: 'Our service is down :(',
+          type: 'error'
+        }));
       }
     });
   };
