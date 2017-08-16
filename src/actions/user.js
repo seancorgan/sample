@@ -10,10 +10,16 @@ export const deleteAccount = createAction('DELETE_ACCOOUNT');
 var db = new PouchDB('http://localhost:5984/salesforce', {skip_setup: true});
 
 export function saveProfileAsync({name, username}) {
-  return dispatch => {
-    setTimeout(() => {
-      dispatch(saveProfile({name, username}));
-    });
+  return (dispatch, getState) => {
+      const {user} = getState();
+
+      db.putUser(user.username, {
+          metadata : {
+          formalName : name,
+        }
+      }, function (err, response) {
+          dispatch(saveProfile({name, username: user.username}));
+      });
   };
 }
 

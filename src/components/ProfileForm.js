@@ -15,8 +15,7 @@ export default class ProfileForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      nameError: false,
-      usernameError: false
+      nameError: false
     };
   }
   /**
@@ -32,11 +31,10 @@ export default class ProfileForm extends Component {
     return true;
   }
   checkForm() {
-    const username = this.refs.username.input.value;
     const name = this.refs.name.input.value;
 
-    if (this.checkfield(username, 'usernameError', 'Please enter a valid username') && this.checkfield(name, 'nameError', 'Please enter a name')) {
-      this.props.saveProfileAsync({ name, username });
+    if (this.checkfield(name, 'nameError', 'Please enter a name')) {
+      this.props.saveProfileAsync({ name });
     }
   }
   render() {
@@ -50,11 +48,6 @@ export default class ProfileForm extends Component {
             <TextField ref="name" hintText="name" fullWidth defaultValue={user.name} onBlur={() => {
               this.checkfield(this.refs.name.input.value, 'nameError', 'Please enter a valid name');
             }} errorText={this.state.nameError} floatingLabelText="name"/>
-          </div>
-          <div className="col-xs-12">
-            <TextField ref="username" hintText="username" fullWidth defaultValue={user.username} onBlur={() => {
-              this.checkfield(this.refs.username.input.value, 'usernameError', 'Please enter a valid username');
-            }} errorText={this.state.usernameError} floatingLabelText="username"/>
           </div>
         </div>
 
