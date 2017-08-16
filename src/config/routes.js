@@ -8,7 +8,7 @@ import ProfilePage from '../containers/ProfilePage';
 
 export default (
   <Switch>
-    <Route exact path="/" component={CounterPage} />
+    <Route exact path="/" component={Login} />
     <Route exact path="/login" component={Login} />
     <Route exact path="/profile" component={ProfilePage} />
     <Route exact path="/signup" component={SignupPage} />

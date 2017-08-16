@@ -4,17 +4,26 @@ import ProfileForm from '../components/ProfileForm';
 import * as saveProfile from '../actions/saveProfile';
 import wrapActionCreators from '../utils/wrapActionCreators';
 import Card from '../components/Card';
+import Header from '../components/Header';
 
 
 @connect(state => ({
   user: state.user
 }), wrapActionCreators(saveProfile))
 export default class ProfilePage extends Component {
+  componentWillMount() {
+    if(!this.props.user.id) {
+      this.props.history.push('/login');
+    }
+  }
   render() {
     return (
-      <Card>
-        <ProfileForm {...this.props} />
-      </Card>
+      <div>
+        <Header {...this.props} />
+        <Card>
+          <ProfileForm {...this.props} />
+        </Card>
+      </div>
     );
   }
 }
