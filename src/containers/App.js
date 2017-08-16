@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cssModules from 'react-css-modules';
 import styles from '../style/index.scss';
+import SystemNotifications from '../containers/SystemNotifications';
 
 @cssModules(styles)
 export default class App extends Component {
@@ -15,6 +16,7 @@ export default class App extends Component {
     return (
       <div className={styles.container}>
         {children}
+        <div><SystemNotifications/> </div>
       </div>
     );
   }
