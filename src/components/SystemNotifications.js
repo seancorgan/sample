@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import cssModules from 'react-css-modules';
-import styles from '../style/counter.scss';
 import Snackbar from 'material-ui/Snackbar';
-
-@cssModules(styles)
 export default class SystemNotifications extends Component {
   static propTypes = {
     styles: PropTypes.object

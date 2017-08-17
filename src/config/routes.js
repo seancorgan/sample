@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import CounterPage from '../containers/CounterPage';
 import Login from '../containers/Login';
 import SignupPage from '../containers/SignupPage';
 import NotFoundPage from '../containers/NotFoundPage';
