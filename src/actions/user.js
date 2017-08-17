@@ -9,7 +9,7 @@ export const logOut = createAction('LOGOUT');
 export const deleteAccount = createAction('DELETE_ACCOOUNT');
 
 // var db = new PouchDB('https://506381d5-ea8e-4437-adf1-fdc3d52afc43-bluemix.cloudant.com', {skip_setup: true});
-var db = new PouchDB('http://localhost:5984/salesforce', { skip_setup: true });
+var db = new PouchDB('http://localhost:5984/_users', { skip_setup: true });
 
 export function saveProfileAsync({ name, username }) {
   return (dispatch, getState) => {
@@ -78,11 +78,18 @@ export function createProfileAsync({ name, username, password, history }) {
 }
 
 export function deleteAccountAsync(id) {
-  return dispatch => {
-    setTimeout(() => {
-      dispatch(logOut());
-      db.logout();
-      history.push('/signup');
+  return (dispatch, getState) => {
+    var {user} = getState();
+      db.get(user.id).then(function (doc) {
+        dispatch(logOut());
+        db.logout();
+        return db.remove(doc);
+    })
+    .catch((err) => {
+      dispatch(notify({
+         message: 'Our service is down :( ',
+         type: 'error'
+       }));
     });
   };
 }
